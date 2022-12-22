@@ -1,9 +1,7 @@
 import "./App.css";
 import { Pokemons } from "./Pokemons";
-import { withMousePosition } from "./withMousePosition";
 
-function App(props) {
-  console.log(props);
+function App() {
   return (
     <div className="App">
       <Pokemons />
@@ -11,4 +9,4 @@ function App(props) {
   );
 }
 
-export default withMousePosition(App);
+export default App;
