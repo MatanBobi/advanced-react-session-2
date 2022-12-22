@@ -64,6 +64,9 @@ export function Pokemons() {
           isCaught={caughtPokemons.includes(pokemon)}
         />
       ))}
+      {/* <div className="network-status-message" role="status" aria-live="polite">
+        You're offline
+      </div> */}
     </div>
   );
 }
