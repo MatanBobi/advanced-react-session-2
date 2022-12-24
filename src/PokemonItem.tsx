@@ -1,4 +1,5 @@
 import { Pokemon } from "./types";
+import infoIcon from "./assets/info.svg";
 
 export function PokemonItem({
   pokemon,
@@ -25,16 +26,7 @@ export function PokemonItem({
           onChange(pokemon, !isCaught);
         }}
       />
+      {/* <img src={infoIcon} style={{ height: 24, width: 24 }} alt="info" /> */}
     </div>
   );
 }
-
-import React from "react";
-const ModalContext = React.createContext(null);
-
-const Modal = (props) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const value = [isOpen, setIsOpen];
-
-  return <ModalContext.Provider value={value} {...props} />;
-};
