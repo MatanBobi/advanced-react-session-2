@@ -2,11 +2,11 @@
 
 ## Step 1
 
-Create a `NetworkStatusProvider`, that will give the ability to read what's the user's current network status and prevent the user from marking a Pokemon as caught.
+Create a `NetworkStatusProvider`, that will give the ability to read what's the user's current network status and prevent the users from marking a Pokemon as caught when they are offline.
 
 ## Step 2
 
-Create a clear separation between the presentational components and container components. Create the components if you think they are needed.
+Create a clear separation between the presentational components and container components. Create the components if you think they are missing.
 
 ## Step 3
 
