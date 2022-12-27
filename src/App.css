@@ -68,11 +68,11 @@
 
 .pokemon-modal {
   display: flex;
-  flexdirection: row;
+  flex-direction: row;
 }
 
 .pokemon-modal-image {
   display: flex;
-  justifycontent: center;
-  alignitems: center;
+  justify-content: center;
+  align-items: center;
 }

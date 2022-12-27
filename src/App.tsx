@@ -1,10 +1,13 @@
-import { Pokemons } from "./Pokemons";
+import { PokemonsContainerWithLoader } from "./PokemonsContainer";
 import "./App.css";
+import { NetworkStatusProvider } from "./NetworkStatusProvider";
 
 function App() {
   return (
     <div className="App">
-      <Pokemons />
+      <NetworkStatusProvider>
+        <PokemonsContainerWithLoader />
+      </NetworkStatusProvider>
     </div>
   );
 }

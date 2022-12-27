@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-export function PokemonModal() {
-  const { pokemonId } = useParams<{ pokemonId: string }>();
+export function PokemonModal({ pokemonId }: { pokemonId: string }) {
   const [pokemonDetails, setPokemonDetails] = useState<any>();
 
   useEffect(() => {
