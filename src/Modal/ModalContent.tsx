@@ -28,5 +28,8 @@ export function ModalContent({
       <button onClick={closeModal}>X</button>
       <div className="modal-content">{children}</div>
     </div>
+    
   );
 }
+
+

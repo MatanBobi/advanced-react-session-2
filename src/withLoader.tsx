@@ -8,13 +8,19 @@ export function withLoader(
     const [data, setData] = useState(null);
 
     useEffect(() => {
+      let isMounted = true;
+
       async function getData() {
         const res = await fetch(url);
         const data = await res.json();
+        if (!isMounted) return;
         setData(data);
       }
 
       getData();
+      return () => {
+        isMounted = false;
+      };
     }, []);
 
     if (!data) {
