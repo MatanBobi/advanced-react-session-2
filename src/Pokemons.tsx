@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { PokemonItem } from "./PokemonItem";
 import { Pokemon } from "./types";
+import { useQuery } from "@tanstack/react-query";
+
+const fetchPokemons = async (): Promise<Pokemon[]> => {
+  const result = await fetch(
+    "https://pokeapi.co/api/v2/pokemon?limit=151"
+  ).then((res) => res.json());
+  return result.results;
+};
 
 export function Pokemons() {
   const [caughtPokemons, setCaughtPokemons] = useState<Pokemon[]>([]);
   const [showOnlyUnacughtPokemons, setShowOnlyUncaughtPokemons] =
     useState(false);
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [isLoading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
-      .then((res) => res.json())
-      .then((data) => {
-        setPokemons(data.results);
-        setLoading(false);
-      });
-  }, []);
+  const { data: pokemons = [], isLoading } = useQuery({
+    queryKey: ["pokemons"],
+    queryFn: fetchPokemons,
+  });
 
   const visiblePokemons = React.useMemo(() => {
     if (showOnlyUnacughtPokemons) {
@@ -45,16 +46,19 @@ export function Pokemons() {
   };
 
   return (
-    <div>
+    <div className="max-h-screen flex flex-col border-r border-r-slate-300 dark:border-r-slate-600 dark:bg-gray-800 dark:text-white overflow-auto">
       <aside>
         Uncaught Pokemons: {pokemons.length - caughtPokemons.length}
       </aside>
       <div>
-        <span>Show only uncaught pokemons</span>
-        <input
-          type="checkbox"
-          onChange={() => setShowOnlyUncaughtPokemons((prev) => !prev)}
-        />
+        <label>
+          Show only uncaught pokemons
+          <input
+            className="mx-2 cursor-pointer"
+            type="checkbox"
+            onChange={() => setShowOnlyUncaughtPokemons((prev) => !prev)}
+          />
+        </label>
       </div>
       {visiblePokemons.map((pokemon) => (
         <PokemonItem

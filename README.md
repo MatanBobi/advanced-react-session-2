@@ -8,11 +8,11 @@ Create a `NetworkStatusProvider`, that will give the ability to read what's the 
 
 ## Step 2
 
-Create a clear separation between the presentational components and container components. Create the components if you think they are missing.
+Create a `withNetworkStatus` HoC that will wrap the component with a provider.
 
 ## Step 3
 
-Extract the data fetching and loading placeholder from `Pokemons` component to an HoC named `withLoader`.
+Use component composition to create a Layout component with the shared parts.
 
 ## Step 4
 

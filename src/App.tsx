@@ -1,9 +1,9 @@
-import { Pokemons } from "./Pokemons";
 import "./App.css";
+import { Pokemons } from "./Pokemons";
 
 function App() {
   return (
-    <div className="App">
+    <div className="layout dark:bg-gray-800 h-full">
       <Pokemons />
     </div>
   );
