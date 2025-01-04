@@ -12,7 +12,7 @@ Create a `withNetworkStatus` HoC that will wrap the component with a provider.
 
 ## Step 3
 
-Use component composition to create a Layout component with the shared parts.
+Use component composition to create a Loading component that will handle all loading and error cases.
 
 ## Step 4
 
