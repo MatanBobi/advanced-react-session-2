@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PokemonItem } from "./PokemonItem";
 import { Pokemon } from "./types";
 import { useQuery } from "@tanstack/react-query";
+import { Loader } from "./Loader";
 
 const fetchPokemons = async (): Promise<Pokemon[]> => {
   const result = await fetch(
@@ -14,7 +15,11 @@ export function Pokemons() {
   const [caughtPokemons, setCaughtPokemons] = useState<Pokemon[]>([]);
   const [showOnlyUnacughtPokemons, setShowOnlyUncaughtPokemons] =
     useState(false);
-  const { data: pokemons = [], isLoading } = useQuery({
+  const {
+    data: pokemons = [],
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["pokemons"],
     queryFn: fetchPokemons,
   });
@@ -26,10 +31,6 @@ export function Pokemons() {
 
     return pokemons;
   }, [caughtPokemons, pokemons, showOnlyUnacughtPokemons]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   const handlePokemonCaught = (pokemon: Pokemon, caught: boolean) => {
     setCaughtPokemons((prev) => {
@@ -60,14 +61,16 @@ export function Pokemons() {
           />
         </label>
       </div>
-      {visiblePokemons.map((pokemon) => (
-        <PokemonItem
-          key={pokemon.name}
-          pokemon={pokemon}
-          onChange={handlePokemonCaught}
-          isCaught={caughtPokemons.includes(pokemon)}
-        />
-      ))}
+      <Loader isLoading={isLoading} isError={isError}>
+        {visiblePokemons.map((pokemon) => (
+          <PokemonItem
+            key={pokemon.name}
+            pokemon={pokemon}
+            onChange={handlePokemonCaught}
+            isCaught={caughtPokemons.includes(pokemon)}
+          />
+        ))}
+      </Loader>
     </div>
   );
 }

@@ -1,6 +1,10 @@
 import { Pokemon } from "./types";
-import infoIcon from "./assets/info.svg";
 import { getMainImageUrl } from "./utils";
+import { Modal } from "./Modal/Modal";
+import { ModalButton } from "./Modal/ModalButton";
+import { ModalContent } from "./Modal/ModalContent";
+import { PokemonModal } from "./PokemonModal";
+import { InfoIcon } from "./assets/InfoIcon";
 
 export function PokemonItem({
   pokemon,
@@ -27,7 +31,14 @@ export function PokemonItem({
           onChange(pokemon, !isCaught);
         }}
       />
-      {/* <img src={infoIcon} style={{ height: 24, width: 24 }} alt="info" /> */}
+      <Modal>
+        <ModalButton>
+          <InfoIcon style={{ height: 24, width: 24 }} alt="info" />
+        </ModalButton>
+        <ModalContent>
+          <PokemonModal pokemonId={pokemon.name} />
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

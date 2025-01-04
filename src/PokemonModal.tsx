@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Loader } from "./Loader";
 
 const getPokemonDetails = async (pokemonId: string) => {
   const result = await fetch(
@@ -13,25 +14,23 @@ export function PokemonModal({ pokemonId }: { pokemonId: string }) {
     queryFn: () => getPokemonDetails(pokemonId),
   });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div className="pokemon-modal">
-      <div className="pokemon-modal-image">
-        {pokemonDetails && pokemonDetails.sprites && (
-          <img
-            src={pokemonDetails.sprites.front_default}
-            alt={pokemonDetails.name}
-          />
-        )}
+    <Loader isLoading={isLoading}>
+      <div className="pokemon-modal">
+        <div className="pokemon-modal-image">
+          {pokemonDetails && pokemonDetails.sprites && (
+            <img
+              src={pokemonDetails.sprites.front_default}
+              alt={pokemonDetails.name}
+            />
+          )}
+        </div>
+        <div>
+          <h1>{pokemonDetails?.name}</h1>
+          <p>Height: {pokemonDetails?.height}</p>
+          <p>Weight: {pokemonDetails?.weight}</p>
+        </div>
       </div>
-      <div>
-        <h1>{pokemonDetails?.name}</h1>
-        <p>Height: {pokemonDetails?.height}</p>
-        <p>Weight: {pokemonDetails?.weight}</p>
-      </div>
-    </div>
+    </Loader>
   );
 }
