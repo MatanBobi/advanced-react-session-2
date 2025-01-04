@@ -46,7 +46,7 @@ export function Pokemons() {
   };
 
   return (
-    <div className="max-h-screen flex flex-col border-r border-r-slate-300 dark:border-r-slate-600 dark:bg-gray-800 dark:text-white overflow-auto">
+    <div className="max-h-screen flex flex-col border-r border-r-slate-300 dark:border-r-slate-600 dark:bg-gray-800 overflow-auto">
       <aside>
         Uncaught Pokemons: {pokemons.length - caughtPokemons.length}
       </aside>
@@ -68,9 +68,6 @@ export function Pokemons() {
           isCaught={caughtPokemons.includes(pokemon)}
         />
       ))}
-      {/* <div className="network-status-message" role="status" aria-live="polite">
-        You're offline
-      </div> */}
     </div>
   );
 }

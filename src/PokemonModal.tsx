@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
-export function PokemonModal() {
-  const { pokemonId } = useParams<{ pokemonId: string }>();
-  const [pokemonDetails, setPokemonDetails] = useState<any>();
+const getPokemonDetails = async (pokemonId: string) => {
+  const result = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
+  ).then((res) => res.json());
+  return result;
+};
 
-  useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPokemonDetails(data);
-      });
-  }, [pokemonId]);
+export function PokemonModal({ pokemonId }: { pokemonId: string }) {
+  const { data: pokemonDetails = {}, isLoading } = useQuery({
+    queryKey: ["selectedPokemon", pokemonId],
+    queryFn: () => getPokemonDetails(pokemonId),
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="pokemon-modal">
