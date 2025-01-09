@@ -13,8 +13,3 @@ Create a `withNetworkStatus` HoC that will wrap the component with a provider.
 ## Step 3
 
 Use component composition to create a Loading component that will handle all loading and error cases.
-
-## Step 4
-
-Create a Modal using the Compound Component pattern and fetch Pokemon data in that modal.  
-The `PokemonModal` component is ready for you to just set as the content.
